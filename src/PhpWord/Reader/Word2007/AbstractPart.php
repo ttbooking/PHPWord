@@ -577,6 +577,18 @@ abstract class AbstractPart
             'gridSpan'      => array(self::READ_VALUE, 'w:gridSpan'),
             'vMerge'        => array(self::READ_VALUE, 'w:vMerge'),
             'bgColor'       => array(self::READ_VALUE, 'w:shd', 'w:fill'),
+            'borderTopSize' => array(self::READ_VALUE, 'w:tcBorders/w:top', 'w:sz'),
+            'borderTopColor' => array(self::READ_VALUE, 'w:tcBorders/w:top', 'w:color'),
+            'borderTopStyle' => array(self::READ_VALUE, 'w:tcBorders/w:top'),
+            'borderLeftSize' => array(self::READ_VALUE, 'w:tcBorders/w:left', 'w:sz'),
+            'borderLeftColor' => array(self::READ_VALUE, 'w:tcBorders/w:left', 'w:color'),
+            'borderLeftStyle' => array(self::READ_VALUE, 'w:tcBorders/w:left'),
+            'borderRightSize' => array(self::READ_VALUE, 'w:tcBorders/w:right', 'w:sz'),
+            'borderRightColor' => array(self::READ_VALUE, 'w:tcBorders/w:right', 'w:color'),
+            'borderRightStyle' => array(self::READ_VALUE, 'w:tcBorders/w:right'),
+            'borderBottomSize' => array(self::READ_VALUE, 'w:tcBorders/w:bottom', 'w:sz'),
+            'borderBottomColor' => array(self::READ_VALUE, 'w:tcBorders/w:bottom', 'w:color'),
+            'borderBottomStyle' => array(self::READ_VALUE, 'w:tcBorders/w:bottom'),
         );
 
         return $this->readStyleDefs($xmlReader, $domNode, $styleDefs);
