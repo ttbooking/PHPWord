@@ -85,7 +85,8 @@ class Table extends AbstractElement
                         $cellRowSpanAttr = ($cellRowSpan > 1 ? " rowspan=\"{$cellRowSpan}\"" : '');
                         $cellBgColorAttr = (is_null($cellBgColor) ? '' : " bgcolor=\"#{$cellBgColor}\"");
                         $cellFgColorAttr = (is_null($cellFgColor) ? '' : " color=\"#{$cellFgColor}\"");
-                        $content .= "<{$cellTag}{$cellColSpanAttr}{$cellRowSpanAttr}{$cellBgColorAttr}{$cellFgColorAttr}>" . PHP_EOL;
+                        $styleAttr = ' style="' . $this->getBorderStyles($cellStyle) . '" ';
+                        $content .= "<{$cellTag}{$cellColSpanAttr}{$cellRowSpanAttr}{$cellBgColorAttr}{$cellFgColorAttr}{$styleAttr}>" . PHP_EOL;
                         $writer = new Container($this->parentWriter, $rowCells[$j]);
                         $content .= $writer->write();
                         if ($cellRowSpan > 1) {
@@ -138,5 +139,45 @@ class Table extends AbstractElement
         }
 
         return $style . '"';
+    }
+
+    private function getBorderStyles($cellStyle)
+    {
+        $borderLeft = 'border-left:' . $this->getBorderStyle(
+            $cellStyle->getBorderLeftSize(),
+            $cellStyle->getBorderLeftStyle(),
+            $cellStyle->getBorderLeftColor()
+        ) . ';';
+        $borderRight = 'border-right:' . $this->getBorderStyle(
+            $cellStyle->getBorderRightSize(),
+            $cellStyle->getBorderRightStyle(),
+            $cellStyle->getBorderRightColor()
+        ) . ';';
+        $borderTop = 'border-top:' . $this->getBorderStyle(
+            $cellStyle->getBorderTopSize(),
+            $cellStyle->getBorderTopStyle(),
+            $cellStyle->getBorderTopColor()
+        ) . ';';
+        $borderBottom = 'border-bottom:' . $this->getBorderStyle(
+            $cellStyle->getBorderBottomSize(),
+            $cellStyle->getBorderBottomStyle(),
+            $cellStyle->getBorderBottomColor()
+        ) . ';';
+
+        return "{$borderLeft}{$borderRight}{$borderTop}{$borderBottom}";
+    }
+
+    private function getBorderStyle($size, $style, $color)
+    {
+        $result = '0';
+        if (!empty($size)) {
+            $result = "{$size}px";
+            if (!empty($style) && !empty($color)) {
+                $style = 'solid';
+                $result .= " {$style} #{$color}";
+            }
+        }
+
+        return $result;
     }
 }
