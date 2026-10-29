@@ -17,7 +17,7 @@
 
 namespace PhpOffice\PhpWord\Writer\HTML\Part;
 
-use Laminas\Escaper\Escaper;
+use PhpOffice\PhpWord\Escaper\Html as HtmlEscaper;
 use PhpOffice\PhpWord\Exception\Exception;
 use PhpOffice\PhpWord\Writer\AbstractWriter;
 
@@ -32,13 +32,13 @@ abstract class AbstractPart
     private $parentWriter;
 
     /**
-     * @var \Laminas\Escaper\Escaper
+     * @var \PhpOffice\PhpWord\Escaper\Html
      */
     protected $escaper;
 
     public function __construct()
     {
-        $this->escaper = new Escaper();
+        $this->escaper = new HtmlEscaper();
     }
 
     /**

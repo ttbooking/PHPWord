@@ -17,8 +17,8 @@
 
 namespace PhpOffice\PhpWord\Writer\HTML\Element;
 
-use Laminas\Escaper\Escaper;
 use PhpOffice\PhpWord\Element\AbstractElement as Element;
+use PhpOffice\PhpWord\Escaper\Html as HtmlEscaper;
 use PhpOffice\PhpWord\Writer\AbstractWriter;
 
 /**
@@ -50,7 +50,7 @@ abstract class AbstractElement
     protected $withoutP = false;
 
     /**
-     * @var \Laminas\Escaper\Escaper|\PhpOffice\PhpWord\Escaper\AbstractEscaper
+     * @var \PhpOffice\PhpWord\Escaper\Html|\PhpOffice\PhpWord\Escaper\AbstractEscaper
      */
     protected $escaper;
 
@@ -71,7 +71,7 @@ abstract class AbstractElement
         $this->parentWriter = $parentWriter;
         $this->element = $element;
         $this->withoutP = $withoutP;
-        $this->escaper = new Escaper();
+        $this->escaper = new HtmlEscaper();
     }
 
     /**
